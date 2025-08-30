@@ -4,14 +4,20 @@
 #include <stdint.h>
 
 #define NAME "ChessBot v1.0"
-#define BRD_SQ_NUM 120
+#define NUM_SQ 120
 
-// anonymous enums
-enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK }; // pieces
-enum { FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H, FILE_NONE }; // files
-enum { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8, RANK_NONE }; // ranks
-enum { WHITE, BLACK, BOTH }; // colors
+#define MAX_GAME_MOVES 2048 // 2048 plies
 
+// pieces
+enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK };
+// files
+enum { FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H, FILE_NONE };
+// ranks
+enum { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8, RANK_NONE };
+// colors
+enum { WHITE, BLACK, BOTH };
+
+// board
 enum {
     A1 = 21, B1, C1, D1, E1, F1, G1, H1,
     A2 = 31, B2, C2, D2, E2, F2, G2, H2,
@@ -22,19 +28,34 @@ enum {
     A7 = 81, B7, C7, D7, E7, F7, G7, H7,
     A8 = 91, B8, C8, D8, E8, F8, G8, H8,
     NO_SQ
-}; // board
+};
 
 enum { FALSE, TRUE };
 
+// castling permissions
+enum { wK_short = 1, wK_long = 2, bK_short = 4, bK_long = 8 };
+
+// move
 typedef struct {
-    int pcs[BRD_SQ_NUM]; // board, which sq which pc
+    int move;
+    int castlePerm;
+    int enPass;
+    int fiftyMove;
+    uint64_t posHash;
+} S_MOVE;
+
+// board
+typedef struct {
+    int pcs[NUM_SQ]; // board, which sq which pc
     uint64_t pawns[3]; // bitmap of pawns on board of both colors
 
-    int KingSqs[2]; // pos of Kings
+    int kingSqs[2]; // pos of Kings
 
     int side; // whose turn
     int enPass; // track en passant sqr
     int fiftyMove; // 50 moves w/o any captures/pawn moves, then draw
+
+    int castlePerm;
 
     int ply;
     int histPly;
@@ -44,10 +65,11 @@ typedef struct {
     int numPcs[13]; // how many of each pc on board
 
     // all color-wise
-    int bicPcs[3]; // anything not a pawn
+    int bigPcs[3]; // anything not a pawn
     int majPcs[3]; // rooks, queens
     int minPcs[3]; // bishops, knights
 
+    S_MOVE history[MAX_GAME_MOVES]; // store move history
 } S_BOARD;
 
 #endif
