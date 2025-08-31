@@ -3,7 +3,11 @@
 
 #include "board.h"
 
-extern int SQ120_SQ64[NUM_SQ];
-extern int SQ64_SQ120[64];
+// init.c
+extern int SQ64[NUM_SQ];
+extern int SQ120[64];
+extern uint64_t setMask[64];
+extern uint64_t clearMask[64];
+
 
 #endif

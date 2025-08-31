@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#define NAME "ChessBot v1.0"
+#define NAME "Knightmare v1.0"
 #define NUM_SQ 120
 
 #define MAX_GAME_MOVES 2048 // 2048 plies
@@ -41,11 +41,13 @@ typedef struct {
     int castlePerm;
     int enPass;
     int fiftyMove;
-    uint64_t posHash;
+    uint64_t posKey;
 } S_MOVE;
 
 // board
 typedef struct {
+    // hybrid board representation
+    // pce list + bitboard(pawns) + 10x20 mailbox
     int pcs[NUM_SQ]; // board, which sq which pc
     uint64_t pawns[3]; // bitmap of pawns on board of both colors
 
@@ -60,7 +62,7 @@ typedef struct {
     int ply;
     int histPly;
 
-    uint64_t posHash;
+    uint64_t posKey;
 
     int numPcs[13]; // how many of each pc on board
 
@@ -70,6 +72,11 @@ typedef struct {
     int minPcs[3]; // bishops, knights
 
     S_MOVE history[MAX_GAME_MOVES]; // store move history
+
+    // faster than looping thru lots of empty squares
+    // piece list: pce type, num of pcs (max is 10, eg. 2 rooks + 8 promoted pawns)
+    int pceList[13][10]; // default val is NO_SQ
+
 } S_BOARD;
 
 #endif
