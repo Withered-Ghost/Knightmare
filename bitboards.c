@@ -4,12 +4,13 @@
 #include "globals.h"
 #include "macros.h"
 
+// https://www.chessprogramming.org/BitScan
+// https://en.wikipedia.org/wiki/De_Bruijn_sequence#Finding_least-_or_most-significant_set_bit_in_a_word
 // https://www.reddit.com/r/learnprogramming/comments/v5wrlh/where_do_these_arrays_and_numbers_come_from/
-// https://stackoverflow.com/questions/30680559/how-to-find-magic-bitboards?newreg=f6c662a263ef49d1bcfc3739d8d61004
-// https://www.chessprogramming.org/Looking_for_Magics
-// Black Magic -> Do not touch
+
+// Source: https://www.chessprogramming.org/Looking_for_Magics
 // ***** BEGIN *****
-// De Bruijn Sequence
+// De Bruijn Sequence + Matt Taylor's folding trick
 const int BitTable[64] = {
     63, 30, 3, 32, 25, 41, 22, 33, 15, 50, 42, 13, 11, 53, 19, 34, 61, 29, 2,
     51, 21, 43, 45, 10, 18, 47, 1, 54, 9, 57, 0, 35, 62, 31, 40, 4, 49, 5, 52,
@@ -28,11 +29,7 @@ int pop_bit(uint64_t *bb) {
 int count_bits(uint64_t bb) {
     int cnt;
     for(cnt = 0; bb; ++cnt, bb &= bb-1);
-    // i & i-1 removes LS set bit
-    for(int i = 0; i < 64; ++i) {
-        if(i % 8 == 0) printf("\n");
-        printf("%5d", BitTable[i]);
-    }
+    // i & i-1 removes LS1B
     return cnt;
 }
 

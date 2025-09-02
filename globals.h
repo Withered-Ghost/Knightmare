@@ -1,8 +1,6 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#include "board.h"
-
 // init.c
 extern int SQ64[NUM_SQ];
 extern int SQ120[64];

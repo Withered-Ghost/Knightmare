@@ -41,7 +41,7 @@ typedef struct {
     int castlePerm;
     int enPass;
     int fiftyMove;
-    uint64_t posKey;
+    uint64_t posHash;
 } S_MOVE;
 
 // board
@@ -62,7 +62,7 @@ typedef struct {
     int ply;
     int histPly;
 
-    uint64_t posKey;
+    uint64_t posHash;
 
     int numPcs[13]; // how many of each pc on board
 
