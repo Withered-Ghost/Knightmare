@@ -4,8 +4,8 @@
 #include "macros.h"
 
 // transformation arrays
-int SQ64[NUM_SQ];
-int SQ120[64];
+int SQ64[NUM_SQ]; // which sq from 64 if given an idx from 120
+int SQ120[64];// which q from 120 if given an idx from 64
 
 uint64_t setMask[64];
 uint64_t clearMask[64];
