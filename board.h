@@ -48,7 +48,7 @@ typedef struct {
 typedef struct {
     // hybrid board representation
     // pce list + bitboard(pawns) + 10x20 mailbox
-    int pcs[NUM_SQ]; // board, which sq which pc
+    int brd120[NUM_SQ]; // board, which sq which pc
     uint64_t pawns[3]; // bitmap of pawns on board of both colors
 
     int kingSqs[2]; // pos of Kings

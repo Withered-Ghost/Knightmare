@@ -10,12 +10,38 @@ int SQ120[64];// which q from 120 if given an idx from 64
 uint64_t setMask[64];
 uint64_t clearMask[64];
 
+uint64_t pceKeys[13][NUM_SQ]; // each pce on each sq
+uint64_t sideKey;
+uint64_t castleKeys[16]; // 16 unique castling permissions
+
+void init_keys() {
+    int idx = 0;
+    int idx2 = 0;
+
+    for(idx = 0; idx < 13; ++idx) {
+        for(idx2 = 0; idx2 < 120; ++idx2) {
+            pceKeys[idx][idx2] = random_uint64();
+        }
+    }
+
+    sideKey = random_uint64();
+
+    for(idx = 0; idx < 16; ++idx) {
+        castleKeys[idx] = random_uint64();
+    }
+}
+
 void init_masks() {
     int idx = 0;
     uint64_t mask = UINT64_C(1);
 
     for(idx = 0; idx < 64; ++idx) {
-        setMask[idx] = (mask << idx);
+        setMask[idx] = UINT64_C(0);
+        clearMask[idx] = UINT64_C(0);
+    }
+
+    for(idx = 0; idx < 64; ++idx) {
+        setMask[idx] |= (mask << idx);
         clearMask[idx] = ~setMask[idx];
     }
 }
@@ -43,7 +69,9 @@ void init_transformation_arrays() {
 
 // initialize all data structures
 void init() {
+    srand(80085u);
     init_transformation_arrays();
     init_masks();
+    init_keys();
     return;
 }
