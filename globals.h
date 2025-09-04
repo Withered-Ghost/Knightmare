@@ -2,8 +2,8 @@
 #define GLOBALS_H
 
 // init.c
-extern int SQ64[NUM_SQ];
-extern int SQ120[64];
+extern int SQ64_120[NUM_SQ];
+extern int SQ120_64[64];
 
 extern uint64_t setMask[64];
 extern uint64_t clearMask[64];

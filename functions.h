@@ -13,4 +13,6 @@ extern int count_bits(uint64_t bb);
 extern uint64_t random_uint64();
 extern uint64_t calc_pos_hash(const S_BOARD *pos);
 
+// board.c
+extern void reset_board(S_BOARD *pos);
 #endif

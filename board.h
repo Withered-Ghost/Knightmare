@@ -38,25 +38,33 @@ enum { wK_short = 1, wK_long = 2, bK_short = 4, bK_long = 8 };
 // move
 typedef struct {
     int move;
-    int castlePerm;
     int enPass;
     int fiftyMove;
+    int castlePerm;
     uint64_t posHash;
 } S_MOVE;
 
-// board
+// hybrid board representation
+// pce list + bitboard(pawns) + 10x20 mailbox
 typedef struct {
-    // hybrid board representation
-    // pce list + bitboard(pawns) + 10x20 mailbox
     int brd120[NUM_SQ]; // board, which sq which pc
+
+    // all color-wise
     uint64_t pawns[3]; // bitmap of pawns on board of both colors
+    int bigPcs[3]; // anything not a pawn
+    int majPcs[3]; // rooks, queens
+    int minPcs[3]; // bishops, knights
+    int numPcs[13]; // how many of each pc on board
+
+    // faster than looping thru lots of empty squares
+    // piece list: pce type, num of pcs (max is 10, eg. 2 rooks + 8 promoted pawns)
+    int pceList[13][10]; // default val is NO_SQ
 
     int kingSqs[2]; // pos of Kings
 
     int side; // whose turn
     int enPass; // track en passant sqr
     int fiftyMove; // 50 moves w/o any captures/pawn moves, then draw
-
     int castlePerm;
 
     int ply;
@@ -64,19 +72,7 @@ typedef struct {
 
     uint64_t posHash;
 
-    int numPcs[13]; // how many of each pc on board
-
-    // all color-wise
-    int bigPcs[3]; // anything not a pawn
-    int majPcs[3]; // rooks, queens
-    int minPcs[3]; // bishops, knights
-
     S_MOVE history[MAX_GAME_MOVES]; // store move history
-
-    // faster than looping thru lots of empty squares
-    // piece list: pce type, num of pcs (max is 10, eg. 2 rooks + 8 promoted pawns)
-    int pceList[13][10]; // default val is NO_SQ
-
 } S_BOARD;
 
 #endif

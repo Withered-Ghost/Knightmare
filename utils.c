@@ -26,7 +26,7 @@ uint64_t calc_pos_hash(const S_BOARD *pos) {
         if(pce != NO_SQ && pce != EMPTY) {
             // if pce is in mail and pce != empty
             ASSERT(pce >= wP && pce <= bK);
-            // then pce must exist
+            // then pce must exist on that sq
             posHash ^= pceKeys[pce][sq];
             // xor key of pce on sq
         }

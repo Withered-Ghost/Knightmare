@@ -4,8 +4,8 @@
 #include "macros.h"
 
 // transformation arrays
-int SQ64[NUM_SQ]; // which sq from 64 if given an idx from 120
-int SQ120[64];// which q from 120 if given an idx from 64
+int SQ64_120[NUM_SQ]; // which sq from 64 if given an idx from 120
+int SQ120_64[64];// which q from 120 if given an idx from 64
 
 uint64_t setMask[64];
 uint64_t clearMask[64];
@@ -54,14 +54,14 @@ void init_transformation_arrays() {
     int sq = NO_SQ;
     int sq64 = 0; // cheating
 
-    for(idx = 0; idx < NUM_SQ; ++idx) SQ64[idx] = 64;
-    for(idx = 0; idx < 64; ++idx) SQ120[idx] = 120;
+    for(idx = 0; idx < NUM_SQ; ++idx) SQ64_120[idx] = 64;
+    for(idx = 0; idx < 64; ++idx) SQ120_64[idx] = 120;
 
     for(rank = RANK_1; rank <= RANK_8; ++rank) {
         for(file = FILE_A; file <= FILE_H; ++file) {
             sq = FR_SQ120(file, rank);
-            SQ120[sq64] = sq;
-            SQ64[sq] = sq64;
+            SQ120_64[sq64] = sq;
+            SQ64_120[sq] = sq64;
             ++sq64;
         }
     }

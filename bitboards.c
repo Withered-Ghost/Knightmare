@@ -46,7 +46,7 @@ void print_bitboard(uint64_t bb) {
     for(rank = RANK_8; rank >= RANK_1; --rank) {
         for(file = FILE_A; file <= FILE_H; ++file) {
             sq = FR_SQ120(file, rank);
-            sq64 = SQ64[sq];
+            sq64 = SQ64_120[sq];
             if((mask << sq64) & bb) {
                 printf("1");
             }
