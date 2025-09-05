@@ -17,17 +17,17 @@ uint64_t random_uint64() {
 }
 
 uint64_t calc_pos_hash(const S_BOARD *pos) {
-    int sq = 0;
+    int sq120 = 0;
     uint64_t posHash = UINT64_C(0);
     int pce = EMPTY;
 
-    for(sq = 0; sq < NUM_SQ; ++sq) {
-        pce = pos->brd120[sq];
+    for(sq120 = 0; sq120 < NUM_SQ; ++sq120) {
+        pce = pos->brd120[sq120];
         if(pce != NO_SQ && pce != EMPTY) {
             // if pce is in mail and pce != empty
             ASSERT(pce >= wP && pce <= bK);
             // then pce must exist on that sq
-            posHash ^= pceKeys[pce][sq];
+            posHash ^= pceKeys[pce][sq120];
             // xor key of pce on sq
         }
     }

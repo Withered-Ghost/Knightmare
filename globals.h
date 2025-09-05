@@ -12,4 +12,10 @@ extern uint64_t pceKeys[13][120];
 extern uint64_t sideKey;
 extern uint64_t castleKeys[16];
 
+// data.c
+extern char pceChar[];
+extern char fileChar[];
+extern char rankChar[];
+extern char sideChar[];
+
 #endif

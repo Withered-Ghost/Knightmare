@@ -46,12 +46,11 @@ void init_masks() {
     }
 }
 
-// initialize transformation arrays
 void init_transformation_arrays() {
     int idx = 0;
     int file = FILE_A;
     int rank = RANK_1;
-    int sq = NO_SQ;
+    int sq120 = NO_SQ;
     int sq64 = 0; // cheating
 
     for(idx = 0; idx < NUM_SQ; ++idx) SQ64_120[idx] = 64;
@@ -59,9 +58,9 @@ void init_transformation_arrays() {
 
     for(rank = RANK_1; rank <= RANK_8; ++rank) {
         for(file = FILE_A; file <= FILE_H; ++file) {
-            sq = FR_SQ120(file, rank);
-            SQ120_64[sq64] = sq;
-            SQ64_120[sq] = sq64;
+            sq120 = FR_SQ120(file, rank);
+            SQ120_64[sq64] = sq120;
+            SQ64_120[sq120] = sq64;
             ++sq64;
         }
     }

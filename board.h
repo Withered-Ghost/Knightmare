@@ -8,6 +8,10 @@
 
 #define MAX_GAME_MOVES 2048 // 2048 plies
 
+#define START_FEN "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+// Board toMove castlePerms enPass fiftyMove moveNum
+// (*/*)  w/b     KQkq/-      sq/-    num      num
+
 // pieces
 enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK };
 // files
