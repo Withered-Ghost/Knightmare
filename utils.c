@@ -34,7 +34,7 @@ uint64_t calc_pos_hash(const S_BOARD *pos) {
 
     if(pos->enPass != NO_SQ) {
         // if enpass is possible
-        ASSERT(pos->enPass >= 0 && pos->enPass <= NUM_SQ);
+        ASSERT(SQ64_120[pos->enPass] >= 0 && SQ64_120[pos->enPass] <= 63);
         // then it should be on the board
         posHash ^= pceKeys[EMPTY][pos->enPass];
         // xor empty pce on enpass sq

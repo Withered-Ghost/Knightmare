@@ -11,7 +11,7 @@
 #else
 #define ASSERT(n) \
 if(!(n)) {\
-printf("%s - Failed: ", #n);\
+printf("%s - FAILED: ", #n);\
 printf("%s %s ", __DATE__, __TIME__);\
 printf("in %s:%d", __FILE__, __LINE__);\
 exit(EXIT_FAILURE);\
@@ -22,6 +22,8 @@ exit(EXIT_FAILURE);\
 
 // transformation macros
 #define FR_SQ120(f, r) ((f) + 21 + ((r) * 10))
+// #define SQ120_FILE(sq120) (((sq120) - 21) % 10)
+// #define SQ120_RANK(sq120) (((sq120) - 21) / 10)
 #define IDX_SQ120(i) ((i) + 21 + (2 * ((i) >> 3)))
 
 #define SETBIT(bb, sq64) ((bb) |= setMask[(sq64)])

@@ -12,10 +12,18 @@ extern uint64_t pceKeys[13][120];
 extern uint64_t sideKey;
 extern uint64_t castleKeys[16];
 
+extern int FILE_120[NUM_SQ];
+extern int RANK_120[NUM_SQ];
+
 // data.c
 extern char pceChar[];
 extern char fileChar[];
 extern char rankChar[];
 extern char sideChar[];
+extern int pceBig[13];
+extern int pceMaj[13];
+extern int pceMin[13];
+extern int pceVal[13];
+extern int pceClr[13];
 
 #endif
