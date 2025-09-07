@@ -8,6 +8,10 @@
 
 #define MAX_GAME_MOVES 2048 // 2048 plies
 
+#define START_FEN "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+// Board toMove castlePerms enPass fiftyMove moveNum
+// (*/*)  w/b     KQkq/-      sq/-    num      num
+
 // pieces
 enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK };
 // files
@@ -38,45 +42,40 @@ enum { wK_short = 1, wK_long = 2, bK_short = 4, bK_long = 8 };
 // move
 typedef struct {
     int move;
-    int castlePerm;
     int enPass;
     int fiftyMove;
+    int castlePerm;
     uint64_t posHash;
 } S_MOVE;
 
-// board
+// hybrid board representation
+// 10x20 mailbox + pce list + bitboard(pawns)
 typedef struct {
-    // hybrid board representation
-    // pce list + bitboard(pawns) + 10x20 mailbox
-    int pcs[NUM_SQ]; // board, which sq which pc
+    int brd120[NUM_SQ]; // default: NO_SQ, EMPTY
+    int pceList[13][10]; // default: NO_SQ
     uint64_t pawns[3]; // bitmap of pawns on board of both colors
 
-    int kingSqs[2]; // pos of Kings
+    // counters
+    int numPcs[13]; // how many of each pc on board
+    int bigPcs[2]; // anything not a pawn
+    int majPcs[2]; // rooks, queens
+    int minPcs[2]; // bishops, knights
+    int material[2]; // material score
+
+    int kingSq[2]; // pos of Kings
 
     int side; // whose turn
     int enPass; // track en passant sqr
     int fiftyMove; // 50 moves w/o any captures/pawn moves, then draw
-
-    int castlePerm;
+    int castlePerm; // 0 - 15
 
     int ply;
     int histPly;
 
     uint64_t posHash;
 
-    int numPcs[13]; // how many of each pc on board
-
-    // all color-wise
-    int bigPcs[3]; // anything not a pawn
-    int majPcs[3]; // rooks, queens
-    int minPcs[3]; // bishops, knights
-
     S_MOVE history[MAX_GAME_MOVES]; // store move history
-
-    // faster than looping thru lots of empty squares
-    // piece list: pce type, num of pcs (max is 10, eg. 2 rooks + 8 promoted pawns)
-    int pceList[13][10]; // default val is NO_SQ
-
 } S_BOARD;
+// ~50 KiB
 
 #endif
