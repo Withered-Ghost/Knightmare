@@ -30,5 +30,11 @@ int main() {
 
     ASSERT(check_board(brd));
 
+    brd->posHash ^= sideKey;
+
+    printf("\nForced assert...\n");
+
+    ASSERT(check_board(brd));
+
     return 0;
 }
