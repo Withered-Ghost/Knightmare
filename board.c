@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "board.h"
 #include "functions.h"
-#include "globals.h"
+#include "data.h"
 #include "macros.h"
 
 int parse_fen(char *fen, S_BOARD *pos) {

@@ -1,21 +1,7 @@
 #include "board.h"
 #include "functions.h"
-#include "globals.h"
+#include "data.h"
 #include "macros.h"
-
-// transformation arrays
-int SQ64_120[NUM_SQ]; // which sq from 64 if given an idx from 120
-int SQ120_64[64];// which q from 120 if given an idx from 64
-
-uint64_t setMask[64];
-uint64_t clearMask[64];
-
-uint64_t pceKeys[13][NUM_SQ]; // each pce on each sq
-uint64_t sideKey;
-uint64_t castleKeys[16]; // 16 unique castling permissions
-
-int FILE_120[NUM_SQ];
-int RANK_120[NUM_SQ];
 
 void init_transformation_arrays() {
     int idx = 0;

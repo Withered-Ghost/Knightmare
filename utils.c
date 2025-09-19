@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "board.h"
 #include "functions.h"
-#include "globals.h"
+#include "data.h"
 #include "macros.h"
 
 uint64_t random_uint64() {

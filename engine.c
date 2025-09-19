@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "board.h"
 #include "functions.h"
-#include "globals.h"
+#include "data.h"
 #include "macros.h"
 
 #define FEN1 "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"
