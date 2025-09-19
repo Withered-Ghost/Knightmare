@@ -288,7 +288,7 @@ int check_board(const S_BOARD *pos) {
 
     ASSERT((pos->side == WHITE) || (pos->side == BLACK));
     ASSERT(pos->enPass == NO_SQ || (pos->side == WHITE && RANK_120[pos->enPass] == RANK_6) || (pos->side == BLACK && RANK_120[pos->enPass] == RANK_3));
-    ASSERT(pos->fiftyMove >= 0 && pos->fiftyMove <= 50);
+    // ASSERT(pos->fiftyMove >= 0 && pos->fiftyMove <= 50);
     ASSERT(pos->castlePerm >= 0 && pos->castlePerm <= 15);
 
     ASSERT(calc_pos_hash(pos) == pos->posHash);

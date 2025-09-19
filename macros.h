@@ -7,8 +7,11 @@
 #define DEBUG
 
 #ifndef DEBUG
+
 #define ASSERT(n)
+
 #else
+
 #define ASSERT(n) \
 if(!(n)) {\
 printf("%s - FAILED: ", #n);\
@@ -16,6 +19,7 @@ printf("%s %s ", __DATE__, __TIME__);\
 printf("in %s:%d", __FILE__, __LINE__);\
 exit(EXIT_FAILURE);\
 }
+
 #endif
 // # to stringize the macro args
 // ## to concatenate macro tokens
